@@ -1,5 +1,5 @@
 module github.com/cli/browser
 
-go 1.24
+go 1.24.0
 
-require golang.org/x/sys v0.32.0
+require golang.org/x/sys v0.37.0
