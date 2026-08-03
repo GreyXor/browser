@@ -34,7 +34,7 @@ func OpenReader(r io.Reader) error {
 		return fmt.Errorf("browser: could not create temporary file: %w", err)
 	}
 	if _, err := io.Copy(f, r); err != nil {
-		f.Close()
+		_ = f.Close() // best-effort; the copy error is what we report
 		return fmt.Errorf("browser: caching temporary file failed: %w", err)
 	}
 	if err := f.Close(); err != nil {
@@ -52,5 +52,13 @@ func runCmd(prog string, args ...string) error {
 	cmd := exec.Command(prog, args...)
 	cmd.Stdout = Stdout
 	cmd.Stderr = Stderr
-	return cmd.Start()
+	if err := cmd.Start(); err != nil {
+		return err
+	}
+	// Reap the child in the background instead of blocking the caller on
+	// it: callers expect OpenURL/OpenFile to return as soon as the browser
+	// has launched, but never Waiting would leak a zombie process for
+	// every call in a long-running program.
+	go func() { _ = cmd.Wait() }()
+	return nil
 }

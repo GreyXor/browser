@@ -7,7 +7,9 @@ This fork adds:
 
 - `OpenReader` error wrapping;
 - `ErrNotFound` error wrapping on BSD;
-- Go 1.21 support.
+- Go 1.25+ support;
+- reaping of spawned browser processes in the background, so long-running
+  programs that call these helpers repeatedly don't accumulate zombies.
 
 ## Usage
 

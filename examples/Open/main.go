@@ -2,14 +2,14 @@
 //
 // Usage:
 //
-//    # Open a file in a browser window
-//    Open $FILE
+//	# Open a file in a browser window
+//	Open $FILE
 //
-//    # Open a URL in a browser window
-//    Open $URL
+//	# Open a URL in a browser window
+//	Open $URL
 //
-//    # Open the contents of stdin in a browser window
-//    cat $SOMEFILE | Open
+//	# Open the contents of stdin in a browser window
+//	cat $SOMEFILE | Open
 package main
 
 import (

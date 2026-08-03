@@ -1,4 +1,4 @@
-// +build !linux,!windows,!darwin,!openbsd,!freebsd,!netbsd
+//go:build !linux && !windows && !darwin && !openbsd && !freebsd && !netbsd
 
 package browser
 
@@ -8,5 +8,5 @@ import (
 )
 
 func openBrowser(url string) error {
-	return fmt.Errorf("openBrowser: unsupported operating system: %v", runtime.GOOS)
+	return fmt.Errorf("browser: unsupported operating system: %v", runtime.GOOS)
 }
